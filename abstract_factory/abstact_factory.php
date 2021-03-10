@@ -41,7 +41,7 @@ class ConcreteProductA1 implements ProductA{
     }
     public function usefull_product_function2(ProductB $b){
 
-        return $b->usefull_product_function." through A1";
+        return $b->usefull_product_function()." through A1";
 
     }
 }
@@ -53,7 +53,7 @@ class ConcreteProductA2 implements ProductA{
     }
     public function usefull_product_function2(ProductB $b)
     {
-        return $b->usefull_product_function." Through A2";
+        return $b->usefull_product_function()." Through A2";
     }
 }
 
@@ -71,3 +71,15 @@ class ConcreteProductB2 implements ProductB{
     }
 }
 
+
+function client_code(AbstractFactory $factory){
+    $productA = $factory->create_product_A();    
+    $productB = $factory->create_product_B();  
+    
+    echo $productA->usefull_product_function()."<br>";
+    echo $productA->usefull_product_function2($productB)."<br>";
+    echo $productB->usefull_product_function()."<br>";
+}
+
+client_code(new ConcreteFactory1);
+client_code(new ConcreteFactory2);
